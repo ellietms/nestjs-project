@@ -1,5 +1,6 @@
 import { Controller, Post, Body, Header } from '@nestjs/common';
 import { ProductDto } from '../dtos/ProductDto.dto';
+// import { ProductInterface } from 'src/types/IProduct';
 import { ProductService } from './products.service';
 
 @Controller('/products')
