@@ -15,6 +15,12 @@ export class ProductsContrller {
     return this.productService.addNewProduct(product)
   }
 
+  // post to specific data - with id
+  @Post("create/:id")
+  postSpecificProduct(@Param("id") id:string){
+    
+  }
+
   // get the list of products
   @Get("lists")
   getAllProducts(){
@@ -27,5 +33,6 @@ export class ProductsContrller {
     return this.productService.getSpecificProduct(id)
   }
 
-  // post to specific data - with id
+  
+
 }

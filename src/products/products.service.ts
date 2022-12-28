@@ -7,11 +7,17 @@ import { v4 as uuidv4 } from 'uuid';
 export class ProductService {
   products: ProductDto[] = [];
   private uniqueId : number = 0;
+
+
   addNewProduct(product: ProductDto) {
     this.uniqueId++;
     product['id'] = this.uniqueId.toString()
     this.products.push(product);
     return this.products;
+  }
+
+  postSpecificProduct(productId: string){
+    
   }
 
   getAllProducts() {
@@ -22,4 +28,6 @@ export class ProductService {
    let getProductById = this.products.filter(eachProduct => eachProduct.id === productId)
    return getProductById
   }
+
+
 }
