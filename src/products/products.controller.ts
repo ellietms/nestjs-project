@@ -7,7 +7,7 @@ import { ProductService } from './products.service';
 export class ProductsContrller {
   // handling incoming post request
   constructor(private readonly productService: ProductService) {}
-  @Post()
+  @Post("create")
   addNewProduct(@Body() product: ProductDto) {
     console.log("-----", product)
     return this.productService.addNewProduct(product)
