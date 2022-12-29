@@ -17,8 +17,8 @@ export class ProductsContrller {
 
   // post to specific data - with id
   @Post("create/:id")
-  postSpecificProduct(@Param("id") id:string){
-    
+  postSpecificProduct(@Body() product: ProductDto, @Param("id") id:string){
+    return this.productService.postSpecificProduct(product,id)
   }
 
   // get the list of products
