@@ -45,12 +45,21 @@ export class ProductService {
     return getProductById;
   }
 
-  // PUT
-
-
+  // Patch - because I want to just change what I updated
+  updateSpecificProduct(modifiedField: {}, productId: string) {
+    let getProductById = this.products.filter(
+      (eachProduct) => eachProduct.id === productId,
+    );
+    getProductById.map((data) => {
+      for (let eachProperty in data) {
+        if (modifiedField[eachProperty]) {
+          data[eachProperty] = modifiedField[eachProperty]
+        }
+      }
+    });
+    console.log("MODIFIED ========//////=====>>", getProductById)
+    return getProductById;
+  }
 
   // DELETE
-
-
-  
 }

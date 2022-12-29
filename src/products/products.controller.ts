@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Param } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, Patch } from '@nestjs/common';
 import { ProductDto } from '../dtos/ProductDto.dto';
 // import { ProductInterface } from 'src/types/IProduct';
 import { ProductService } from './products.service';
@@ -37,7 +37,11 @@ export class ProductsContrller {
     return this.productService.postSpecificProduct(product, id);
   }
 
-  // PUT
+  // Patch
+  @Patch('update/:id')
+  updateSpecificProduct(@Body() modifiedField: {},@Param('id') id:string){
+    return this.productService.updateSpecificProduct(modifiedField,id);
+  }
 
 
 
@@ -45,5 +49,5 @@ export class ProductsContrller {
   //DELETE
 
 
-  
+
 }
