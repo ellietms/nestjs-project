@@ -6,7 +6,7 @@ import { ProductDto } from '../dtos/ProductDto.dto';
 export class ProductService {
   products: ProductDto[] = [];
   private uniqueId: number = 0;
-  private deletedItems = []
+  deletedItems = []
 
   // GET
   getAllProducts() {
@@ -18,10 +18,6 @@ export class ProductService {
       (eachProduct) => eachProduct.id === productId,
     );
     return getProductById;
-  }
-
-  getListsDeletedItems(){
-    return {"deleted-items": this.deletedItems};
   }
 
   // POST
@@ -71,7 +67,13 @@ export class ProductService {
     let filteredData = this.products.filter(eachData => eachData.id !== productId);
     let dataWithID = this.products.filter(eachData => eachData.id === productId);
     this.products = filteredData;
-    this.deletedItems.push(dataWithID)
+    this.deletedItems.push(dataWithID) 
      return {"CurrentDeletedItem": dataWithID, "ListsAllDeletedItems": this.deletedItems};
+  }
+
+ // ??
+  getListsDeletedItems(){
+    console.log(this.deletedItems)
+    return {"deleted-items": this.deletedItems};
   }
 }
