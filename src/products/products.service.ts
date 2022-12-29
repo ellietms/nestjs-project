@@ -7,8 +7,19 @@ export class ProductService {
   products: ProductDto[] = [];
   private uniqueId: number = 0;
 
-  // all post functions 
-  
+  // GET
+  getAllProducts() {
+    return this.products;
+  }
+
+  getSpecificProduct(productId: string) {
+    let getProductById = this.products.filter(
+      (eachProduct) => eachProduct.id === productId,
+    );
+    return getProductById;
+  }
+
+  // POST
   addNewProduct(product: ProductDto) {
     this.uniqueId++;
     product['id'] = this.uniqueId.toString();
@@ -30,20 +41,16 @@ export class ProductService {
         }
       }
     });
-    console.log("I am working =========> ", "new data" , getProductById);
+    console.log('I am working =========> ', 'new data', getProductById);
     return getProductById;
   }
 
-  // all get functions  
+  // PUT
 
-  getAllProducts() {
-    return this.products;
-  }
 
-  getSpecificProduct(productId: string) {
-    let getProductById = this.products.filter(
-      (eachProduct) => eachProduct.id === productId,
-    );
-    return getProductById;
-  }
+
+  // DELETE
+
+
+  
 }

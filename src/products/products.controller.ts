@@ -7,32 +7,43 @@ import { ProductService } from './products.service';
 export class ProductsContrller {
   // handling incoming post requests
   constructor(private readonly productService: ProductService) {}
-  
-  // create product by post requests
-  @Post("create")
-  addNewProduct(@Body() product: ProductDto) {
-    console.log("-----", product)
-    return this.productService.addNewProduct(product)
-  }
 
-  // post to specific data - with id
-  @Post("create/:id")
-  postSpecificProduct(@Body() product: ProductDto, @Param("id") id:string){
-    return this.productService.postSpecificProduct(product,id)
-  }
+  // GET
 
   // get the list of products
-  @Get("lists")
-  getAllProducts(){
+  @Get('lists')
+  getAllProducts() {
     return this.productService.getAllProducts();
   }
 
   //get specific data by id
-  @Get("lists/:id")
-  getSpecificProduct(@Param("id") id:string){
-    return this.productService.getSpecificProduct(id)
+  @Get('lists/:id')
+  getSpecificProduct(@Param('id') id: string) {
+    return this.productService.getSpecificProduct(id);
   }
 
-  
+  // POST
 
+  // create product by post requests
+  @Post('create')
+  addNewProduct(@Body() product: ProductDto) {
+    console.log('-----', product);
+    return this.productService.addNewProduct(product);
+  }
+
+  // post to specific data - with id
+  @Post('create/:id')
+  postSpecificProduct(@Body() product: ProductDto, @Param('id') id: string) {
+    return this.productService.postSpecificProduct(product, id);
+  }
+
+  // PUT
+
+
+
+
+  //DELETE
+
+
+  
 }
