@@ -1,6 +1,6 @@
-import { Product } from './Product';
+import { ProductEntity } from './ProductEntity';
 
-const entities = [Product];
+const entities = [ProductEntity];
 
-export { Product };
+export { ProductEntity };
 export default entities;

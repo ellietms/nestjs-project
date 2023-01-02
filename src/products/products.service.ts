@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ProductDto } from '../dtos/ProductDto.dto';
+import {ProductEntity} from "../typeorm/ProductEntity";
+import {DatabaseProductDto} from "../dtos/DatabaseProductDto.dto"
+import { Repository } from "typeorm";
 // import { ProductInterface } from 'src/types/IProduct';
 
 @Injectable()
@@ -7,6 +10,8 @@ export class ProductService {
   products: ProductDto[] = [];
   private uniqueId: number = 0;
   deletedItems = []
+
+  // constructor(@InjectRepository(ProductEntity) private  readonly databaseProductDto: databaseProductDtoRepository<ProductEntity>)
 
   // GET
   getAllProducts() {
@@ -44,6 +49,12 @@ export class ProductService {
     });
     console.log('I am working =========> ', 'new data', getProductById);
     return getProductById;
+  }
+
+  // POST TO DATABASE
+
+  addNewProductDatabase(newProduct: DatabaseProductDto){
+    return newProduct;
   }
 
   // Patch - because I want to just change what I updated

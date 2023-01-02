@@ -6,9 +6,11 @@ import {
   Param,
   Patch,
   Delete,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { ProductDto } from '../dtos/ProductDto.dto';
-// import { ProductInterface } from 'src/types/IProduct';
+import {DatabaseProductDto} from "../dtos/DatabaseProductDto.dto"
 import { ProductService } from './products.service';
 
 @Controller('/products')
@@ -41,6 +43,15 @@ export class ProductsContrller {
   @Post('create/:id')
   postSpecificProduct(@Body() product: ProductDto, @Param('id') id: string) {
     return this.productService.postSpecificProduct(product, id);
+  }
+
+
+  // post to database
+  @Post('database/create')
+  @UsePipes(ValidationPipe)
+  addNewProductDatabase(@Body() newProduct: DatabaseProductDto){
+    console.log("========== POST DATABASE =====", newProduct);
+    return this.productService.addNewProductDatabase(newProduct)
   }
 
   // Patch

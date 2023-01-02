@@ -1,12 +1,12 @@
 import { IsNotEmpty, IsNumber, IsString, MinLength } from "class-validator";
 
-export class databaseProductDto {
+export class DatabaseProductDto {
     @IsNotEmpty()
     @IsString()
     id: string;
     
     @IsNotEmpty()
-    @MinLength(3)
+    @MinLength(5)
     @IsString()
     name: string;
     
