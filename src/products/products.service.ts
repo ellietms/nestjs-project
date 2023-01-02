@@ -1,17 +1,20 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { ProductDto } from '../dtos/ProductDto.dto';
-import {ProductEntity} from "../typeorm/ProductEntity";
-import {DatabaseProductDto} from "../dtos/DatabaseProductDto.dto"
-import { Repository } from "typeorm";
-// import { ProductInterface } from 'src/types/IProduct';
+import { ProductEntity } from '../typeorm/ProductEntity';
+import { DatabaseProductDto } from '../dtos/DatabaseProductDto.dto';
 
 @Injectable()
 export class ProductService {
   products: ProductDto[] = [];
   private uniqueId: number = 0;
-  deletedItems = []
+  deletedItems = [];
 
-  // constructor(@InjectRepository(ProductEntity) private  readonly databaseProductDto: databaseProductDtoRepository<ProductEntity>)
+  constructor(
+    @InjectRepository(ProductEntity)
+    private readonly productRepository: Repository<ProductEntity>,
+  ) {}
 
   // GET
   getAllProducts() {
@@ -53,7 +56,7 @@ export class ProductService {
 
   // POST TO DATABASE
 
-  addNewProductDatabase(newProduct: DatabaseProductDto){
+  addNewProductDatabase(newProduct: DatabaseProductDto) {
     return newProduct;
   }
 
@@ -65,26 +68,33 @@ export class ProductService {
     getProductById.map((data) => {
       for (let eachProperty in data) {
         if (modifiedField[eachProperty]) {
-          data[eachProperty] = modifiedField[eachProperty]
+          data[eachProperty] = modifiedField[eachProperty];
         }
       }
     });
-    console.log("MODIFIED ========//////=====>>", getProductById)
+    console.log('MODIFIED ========//////=====>>', getProductById);
     return getProductById;
   }
 
   // DELETE
-  deleteSpecificProduct(productId:string){
-    let filteredData = this.products.filter(eachData => eachData.id !== productId);
-    let dataWithID = this.products.filter(eachData => eachData.id === productId);
+  deleteSpecificProduct(productId: string) {
+    let filteredData = this.products.filter(
+      (eachData) => eachData.id !== productId,
+    );
+    let dataWithID = this.products.filter(
+      (eachData) => eachData.id === productId,
+    );
     this.products = filteredData;
-    this.deletedItems.push(dataWithID) 
-     return {"CurrentDeletedItem": dataWithID, "ListsAllDeletedItems": this.deletedItems};
+    this.deletedItems.push(dataWithID);
+    return {
+      CurrentDeletedItem: dataWithID,
+      ListsAllDeletedItems: this.deletedItems,
+    };
   }
 
- // ??
-  getListsDeletedItems(){
-    console.log(this.deletedItems)
-    return {"deleted-items": this.deletedItems};
+  // ??
+  getListsDeletedItems() {
+    console.log(this.deletedItems);
+    return { 'deleted-items': this.deletedItems };
   }
 }
