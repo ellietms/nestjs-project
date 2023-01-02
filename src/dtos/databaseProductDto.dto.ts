@@ -1,4 +1,5 @@
-export class ProductDto {
+export class databaseProductDto {
+    
 
     id: string;
     
