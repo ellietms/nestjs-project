@@ -16,15 +16,19 @@ export class ProductService {
     private readonly productRepository: Repository<ProductEntity>,
   ) {}
 
-  // GET
-  getAllProducts() {
-    return this.products;
+  // GET data from database
+  async getAllProducts(){
+    const result = await this.productRepository.find()
+    return result;
   }
 
-  getSpecificProduct(productId: string) {
-    let getProductById = this.products.filter(
-      (eachProduct) => eachProduct.id === productId,
-    );
+  getSpecificProduct(productId) {
+    let getProductById = 
+    this.productRepository.findOneBy(productId)
+    // this.products.filter(
+    //   (eachProduct) => eachProduct.id === productId,
+    // );
+    console.log("DATABASE ID FOUND", productId,getProductById )
     return getProductById;
   }
 
@@ -57,7 +61,10 @@ export class ProductService {
   // POST TO DATABASE
 
   addNewProductDatabase(newProduct: DatabaseProductDto) {
-    return newProduct;
+    const myNewProduct = this.productRepository.create(newProduct);
+    const newSavedData =  this.productRepository.save(myNewProduct);
+    console.log("____KKKKKK_____", newSavedData)
+    return newSavedData
   }
 
   // Patch - because I want to just change what I updated

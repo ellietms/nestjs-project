@@ -50,7 +50,6 @@ export class ProductsContrller {
   @Post('database/create')
   @UsePipes(ValidationPipe)
   addNewProductDatabase(@Body() newProduct: DatabaseProductDto){
-    console.log("========== POST DATABASE =====", newProduct);
     return this.productService.addNewProductDatabase(newProduct)
   }
 
